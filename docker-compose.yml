@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+
+  db:
+    image: postgres:11
+    container_name: sales-db
+    restart: always
+    environment:
+      - POSTGRES_DB=sales-db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=123456
+    ports: 
+      - 5433:5432
+
+  api:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      container_name: sales-api
+      environment:
+        - PORT=8082
+      ports: 
+        - 8082:8082
+      depends_on:
+        - rabbitmq
+        - db
+  
+  rabbitmq:
+      image: rabbitmq:3-management
+      container_name: sales-rabbitmq
+      restart: always
+      ports: 
+        - 5672:5672
+        - 15672:15672
+        - 25676:25676
