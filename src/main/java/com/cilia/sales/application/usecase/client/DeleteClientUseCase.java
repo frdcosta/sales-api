@@ -10,7 +10,7 @@ public class DeleteClientUseCase {
 
     private final ClientService clientService;
 
-    public void deleteClient(Long id){
+    public void execute(Long id){
         clientService.deleteClient(id);
     }
 }

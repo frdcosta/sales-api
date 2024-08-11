@@ -10,7 +10,7 @@ public class DeleteProductUseCase {
 
     private final ProductService productService;
 
-    public void deleteProduct(Long id){
+    public void execute(Long id){
         productService.deleteProduct(id);
     }
 }

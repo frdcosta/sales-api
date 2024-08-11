@@ -14,11 +14,11 @@ public class GetClientUseCase {
 
     private final ClientService clientService;
 
-    public List<Client> getAllClients() {
+    public List<Client> execute() {
         return clientService.getAllClients();
     }
 
-    public Optional<Client> getClientById(Long id) {
+    public Optional<Client> execute(Long id) {
         return clientService.getClientById(id);
     }
 }

@@ -14,11 +14,11 @@ public class GetProductUseCase {
 
     private final ProductService productService;
 
-    public List<Product> getAllProducts() {
+    public List<Product> execute() {
         return productService.getAllProducts();
     }
 
-    public Optional<Product> getProductById(Long id) {
+    public Optional<Product> execute(Long id) {
         return productService.getProductById(id);
     }
 }

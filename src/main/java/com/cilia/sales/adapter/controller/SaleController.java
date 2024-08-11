@@ -25,17 +25,17 @@ public class SaleController {
 
     @GetMapping
     public ResponseEntity<List<SaleResponse>> getAllSales() {
-        return ResponseEntity.ok(mapper.toResponseList(getSaleUseCase.getAllSales()));
+        return ResponseEntity.ok(mapper.toResponseList(getSaleUseCase.execute()));
     }
 
     @PostMapping
     public ResponseEntity<SaleResponse> createSale(@Valid @RequestBody SaleRequest sale) {
-        return ResponseEntity.ok(mapper.toResponse(saveSaleUseCase.saveSale(mapper.fromRequest(sale))));
+        return ResponseEntity.ok(mapper.toResponse(saveSaleUseCase.execute(mapper.fromRequest(sale))));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<SaleResponse> getSaleById(@PathVariable Long id) {
-        return getSaleUseCase.getSaleById(id)
+        return getSaleUseCase.execute(id)
                 .map(mapper::toResponse)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -43,14 +43,14 @@ public class SaleController {
 
     @PutMapping("/{id}")
     public ResponseEntity<SaleResponse> updateSale(@PathVariable Long id, @Valid @RequestBody SaleRequest saleDetails) {
-        return getSaleUseCase.getSaleById(id)
-                .map(client -> ResponseEntity.ok(mapper.toResponse(saveSaleUseCase.saveSale(mapper.fromRequest(saleDetails)))))
+        return getSaleUseCase.execute(id)
+                .map(client -> ResponseEntity.ok(mapper.toResponse(saveSaleUseCase.execute(mapper.fromRequest(saleDetails)))))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSale(@PathVariable Long id) {
-        deleteSaleUseCase.deleteSale(id);
+        deleteSaleUseCase.execute(id);
         return ResponseEntity.noContent().build();
     }
 }

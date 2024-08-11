@@ -14,11 +14,11 @@ public class GetSaleUseCase {
 
     private final SaleService saleService;
 
-    public List<Sale> getAllSales() {
+    public List<Sale> execute() {
         return saleService.getAllSales();
     }
 
-    public Optional<Sale> getSaleById(Long id) {
+    public Optional<Sale> execute(Long id) {
         return saleService.getSaleById(id);
     }
 }

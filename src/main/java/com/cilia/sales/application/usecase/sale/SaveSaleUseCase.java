@@ -11,7 +11,7 @@ public class SaveSaleUseCase {
 
     private final SaleService saleService;
 
-    public Sale saveSale(Sale sale){
+    public Sale execute(Sale sale){
         return saleService.saveSale(sale);
     }
 }

@@ -11,7 +11,7 @@ public class SaveProductUseCase {
 
     private final ProductService productService;
 
-    public Product saveProduct(Product product){
+    public Product execute(Product product){
         return productService.saveProduct(product);
     }
 }

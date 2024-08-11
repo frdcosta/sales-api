@@ -11,7 +11,7 @@ public class SaveClientUseCase {
 
     private final ClientService clientService;
 
-    public Client saveClient(Client client){
+    public Client execute(Client client){
         return clientService.saveClient(client);
     }
 }

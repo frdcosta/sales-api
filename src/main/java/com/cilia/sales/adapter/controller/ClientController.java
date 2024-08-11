@@ -25,17 +25,17 @@ public class ClientController {
 
     @GetMapping
     public ResponseEntity<List<ClientResponse>> getAllClients() {
-        return ResponseEntity.ok(mapper.toResponseList(getClientUseCase.getAllClients()));
+        return ResponseEntity.ok(mapper.toResponseList(getClientUseCase.execute()));
     }
 
     @PostMapping
     public ResponseEntity<ClientResponse> createClient(@Valid @RequestBody ClientRequest request) {
-        return ResponseEntity.ok(mapper.toResponse(saveClientUseCase.saveClient(mapper.fromRequest(request))));
+        return ResponseEntity.ok(mapper.toResponse(saveClientUseCase.execute(mapper.fromRequest(request))));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ClientResponse> getClientById(@PathVariable Long id) {
-        return getClientUseCase.getClientById(id)
+        return getClientUseCase.execute(id)
                 .map(mapper::toResponse)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -43,14 +43,14 @@ public class ClientController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ClientResponse> updateClient(@PathVariable Long id, @Valid @RequestBody ClientRequest clientDetails) {
-        return getClientUseCase.getClientById(id)
-                .map(client -> ResponseEntity.ok(mapper.toResponse(saveClientUseCase.saveClient(mapper.fromRequest(clientDetails)))))
+        return getClientUseCase.execute(id)
+                .map(client -> ResponseEntity.ok(mapper.toResponse(saveClientUseCase.execute(mapper.fromRequest(clientDetails)))))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClient(@PathVariable Long id) {
-        deleteClientUseCase.deleteClient(id);
+        deleteClientUseCase.execute(id);
         return ResponseEntity.noContent().build();
     }
 }
