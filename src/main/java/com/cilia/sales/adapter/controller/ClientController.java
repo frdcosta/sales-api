@@ -35,10 +35,8 @@ public class ClientController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ClientResponse> getClientById(@PathVariable Long id) {
-        return getClientUseCase.execute(id)
-                .map(mapper::toResponse)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok(mapper.toResponse(getClientUseCase.execute(id)));
+
     }
 
     @PutMapping("/{id}")

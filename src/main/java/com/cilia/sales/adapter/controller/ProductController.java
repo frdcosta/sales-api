@@ -35,10 +35,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponse> getProductById(@PathVariable Long id) {
-        return getProductUseCase.execute(id)
-                .map(mapper::toResponse)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok(mapper.toResponse(getProductUseCase.execute(id)));
     }
 
     @PutMapping("/{id}")

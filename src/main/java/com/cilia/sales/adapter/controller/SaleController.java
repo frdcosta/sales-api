@@ -4,11 +4,9 @@ import com.cilia.sales.adapter.mapper.SaleMapper;
 import com.cilia.sales.application.dto.request.SaleRequest;
 import com.cilia.sales.application.dto.request.SaleUpdateRequest;
 import com.cilia.sales.application.dto.response.SaleResponse;
-import com.cilia.sales.application.usecase.sale.DeleteSaleUseCase;
 import com.cilia.sales.application.usecase.sale.GetSaleUseCase;
 import com.cilia.sales.application.usecase.sale.ProduceSaleUseCase;
 import com.cilia.sales.application.usecase.sale.SaveSaleUseCase;
-import com.cilia.sales.domain.service.SaleProducerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -39,10 +37,7 @@ public class SaleController {
 
     @GetMapping("/{id}")
     public ResponseEntity<SaleResponse> getSaleById(@PathVariable Long id) {
-        return getSaleUseCase.execute(id)
-                .map(mapper::toResponse)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok(mapper.toResponse(getSaleUseCase.execute(id)));
     }
 
     @PutMapping("/{id}")
