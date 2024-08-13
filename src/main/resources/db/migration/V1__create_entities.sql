@@ -21,5 +21,5 @@ CREATE TABLE sale (
     client_id INTEGER NOT NULL REFERENCES client(id) ON DELETE CASCADE,
     sale_date TIMESTAMP NOT NULL,
     total_value DECIMAL(15, 2) NOT NULL CHECK (total_value > 0),
-    status VARCHAR(20) NOT NULL CHECK (status IN ('PENDING', 'FINALIZED', 'CANCELLED'))
+    status VARCHAR(20) NOT NULL CHECK (status IN ('PENDENTE', 'FINALIZADA', 'CANCELADA'))
 );

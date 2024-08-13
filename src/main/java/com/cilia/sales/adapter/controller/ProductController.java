@@ -42,10 +42,9 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponse> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductRequest productDetails) {
-        return getProductUseCase.execute(id)
-                .map(client -> ResponseEntity.ok(mapper.toResponse(saveProductUseCase.execute(mapper.fromRequest(productDetails)))))
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<ProductResponse> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductRequest request) {
+        var productDetails = mapper.fromRequest(request);
+        return ResponseEntity.ok(mapper.toResponse(saveProductUseCase.execute(id, productDetails)));
     }
 
     @DeleteMapping("/{id}")

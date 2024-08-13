@@ -27,10 +27,8 @@ public class Sale {
     @NotNull
     private Client client;
 
-    @ManyToMany
-    @NotNull
-    @Size(min = 1)
-    private List<Product> products;
+    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SaleItem> saleItems;
 
     @NotNull
     @Column(name = "sale_date")

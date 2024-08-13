@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Builder
@@ -36,6 +37,7 @@ public class Product {
 
     @NotNull
     @Size(min = 13, max = 13)
+    @Column( unique = true)
     private String barcode;
 
     @NotNull

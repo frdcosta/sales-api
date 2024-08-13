@@ -42,10 +42,9 @@ public class ClientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ClientResponse> updateClient(@PathVariable Long id, @Valid @RequestBody ClientRequest clientDetails) {
-        return getClientUseCase.execute(id)
-                .map(client -> ResponseEntity.ok(mapper.toResponse(saveClientUseCase.execute(mapper.fromRequest(clientDetails)))))
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<ClientResponse> updateClient(@PathVariable Long id, @Valid @RequestBody ClientRequest request) {
+        var clientDetails = mapper.fromRequest(request);
+        return ResponseEntity.ok(mapper.toResponse(saveClientUseCase.execute(id, clientDetails)));
     }
 
     @DeleteMapping("/{id}")

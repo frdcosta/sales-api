@@ -14,4 +14,11 @@ public class SaveSaleUseCase {
     public Sale execute(Sale sale){
         return saleService.saveSale(sale);
     }
+
+    public Sale execute(Long id, Sale sale){
+        return saleService.getSaleById(id).map(saleToUpdate -> {
+            saleToUpdate.setStatus(sale.getStatus());
+            return saleService.saveSale(saleToUpdate);
+        }).orElseThrow();
+    }
 }

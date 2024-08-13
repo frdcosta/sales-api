@@ -14,4 +14,16 @@ public class SaveClientUseCase {
     public Client execute(Client client){
         return clientService.saveClient(client);
     }
+
+    public Client execute(Long id, Client client) {
+        return clientService.getClientById(id).map(clientToUpdate -> {
+            clientToUpdate.setName(client.getName());
+            clientToUpdate.setAddress(client.getAddress());
+            clientToUpdate.setEmail(client.getEmail());
+            clientToUpdate.setBirthDate(client.getBirthDate());
+            clientToUpdate.setPhone(client.getPhone());
+
+            return clientService.saveClient(clientToUpdate);
+        }).orElseThrow();
+    }
 }

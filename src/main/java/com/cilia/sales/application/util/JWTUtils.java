@@ -17,7 +17,7 @@ import java.util.Date;
 @Component
 public class JWTUtils {
 
-    private static final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private static final String SECRET_KEY = "yourTveryTstrongTsecretTkeyT32TcharsTforTgodTsake";
     private static final Integer MINUTES = 60;
 
     public static String generateToken(String email) {
