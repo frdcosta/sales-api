@@ -1,12 +1,14 @@
 package com.cilia.sales.application.dto.request;
 
 import jakarta.validation.constraints.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
+@Builder
 public class ProductRequest {
 
     @NotBlank(message = "Name is mandatory")

@@ -1,6 +1,7 @@
 package com.cilia.sales.application.dto.request;
 
 import jakarta.validation.constraints.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -8,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
+@Builder
 public class SaleRequest {
 
     @NotNull(message = "Client is mandatory")

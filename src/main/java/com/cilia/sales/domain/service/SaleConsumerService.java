@@ -42,6 +42,6 @@ public class SaleConsumerService {
 
         saleToPersist.setSaleItems(saleItems);
         var savedSale = saleService.saveSale(saleToPersist);
-        LOGGER.info( "Sale {} created: ", savedSale.toString());
+        LOGGER.info( "Sale created with id: {} ", savedSale.getId());
     }
 }

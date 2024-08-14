@@ -3,7 +3,8 @@ package com.cilia.sales;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+
+@SpringBootApplication(scanBasePackages = "com.cilia.sales")
 public class SalesApplication {
 
 	public static void main(String[] args) {

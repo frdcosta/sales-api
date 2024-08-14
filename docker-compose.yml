@@ -1,8 +1,7 @@
 version: "3.8"
 services:
-
   db:
-    image: postgres:11
+    image: postgres:15
     container_name: sales-db
     restart: always
     environment:
@@ -10,7 +9,9 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=123456
     ports: 
-      - 5433:5432
+      - 5432:5432
+    networks:
+      - nenetwork
 
   api:
       build:
@@ -18,9 +19,18 @@ services:
         dockerfile: Dockerfile
       container_name: sales-api
       environment:
-        - PORT=8082
+        SPRING_DATASOURCE_URL: jdbc:postgresql://sales-db:5432/sales-db
+        SPRING_DATASOURCE_USERNAME: admin
+        SPRING_DATASOURCE_PASSWORD: 123456
+        PORT: 8081
+        SPRING_RABBITMQ_HOST: rabbitmq
+        SPRING_RABBITMQ_PORT: 5672
+        SPRING_RABBITMQ_USERNAME: guest
+        SPRING_RABBITMQ_PASSWORD: guest
       ports: 
-        - 8082:8082
+        - 8081:8081
+      networks:
+        - nenetwork
       depends_on:
         - rabbitmq
         - db
@@ -33,3 +43,8 @@ services:
         - 5672:5672
         - 15672:15672
         - 25676:25676
+      networks:
+        - nenetwork
+
+networks:
+  nenetwork:

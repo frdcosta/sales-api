@@ -33,7 +33,7 @@ public class SaleService {
     }
 
     public Sale saveSale(Sale sale) {
-        LOGGER.info("Saving sale: {}", sale.toString());
+        LOGGER.info("Saving sale from client: {}", sale.getClient().getName());
         try {
             return saleRepository.save(sale);
         } catch (Exception e){
