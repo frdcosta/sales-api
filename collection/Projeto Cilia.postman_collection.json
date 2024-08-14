@@ -26,7 +26,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"clientId\": 1,\n    \"products\": [2,3],\n    \"saleDate\": \"2024-08-10T14:30:00\",\n    \"totalValue\": 299.00,\n    \"status\": \"PENDENTE\"\n}",
+							"raw": "{\n    \"clientId\": 1,\n    \"products\": [1],\n    \"saleDate\": \"2024-08-10T14:30:00\",\n    \"totalValue\": 299.00,\n    \"status\": \"PENDENTE\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -91,6 +91,16 @@
 				{
 					"name": "getSales",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -111,10 +121,20 @@
 				{
 					"name": "getSaleById",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/sales-api/sales",
+							"raw": "http://localhost:8081/sales-api/sales/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -122,7 +142,8 @@
 							"port": "8081",
 							"path": [
 								"sales-api",
-								"sales"
+								"sales",
+								"1"
 							]
 						}
 					},
@@ -179,7 +200,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/sales-api/clients/1",
+							"raw": "http://localhost:8081/sales-api/clients/11",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -188,7 +209,7 @@
 							"path": [
 								"sales-api",
 								"clients",
-								"1"
+								"11"
 							]
 						}
 					},
